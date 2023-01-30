@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GEOS 472 Page</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <style>
+  .tab {
+    background-color: #3eb489;
+    border-color: white;
+    border-style: solid solid none solid;
+    padding: 15px 15px;
+    display: inline-block;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  .tab:hover {
+    background-color: green;
+    color: white;
+  }
+  #maps {
+    display: none;
+  }
+  body {
+    background-color: #b57edc;
+  }
+  hr {
+    margin: 0px;
+  }
+  .activeTab {
+    background-color: #b57edc;
+  }
+  .p5sketchCanvas {
+    display: block;
+    height: 500px;
+    background-color: red;
+    width: 500px;
+  }
+  </style>
+  <script type="text/javascript">
+    function showTabContent(tabcontent) {
+      document.getElementById("home").style.display = "none";
+      document.getElementById("maps").style.display = "none";
+      document.getElementById(tabcontent).style.display = "block";
+      if (tabcontent == "home") {
+        document.getElementById("homeTab").className += (" " + "activeTab");
+        document.getElementById("mapsTab").className = "tab";
+      }
+      else if (tabcontent == "maps") {
+        document.getElementById("mapsTab").className += (" " + "activeTab");
+        document.getElementById("homeTab").className = "tab";
+      }
+    }
+  </script>
+  <!-- p5.js cannot handle <script /> tags and will erase everything unless a separate </script> tag is used -->
+  <script src="lib/p5.js" type="text/javascript"></script>
+  <script src="test-sketch.js" type="text/javascript"></script>
+  <meta name="robots" content="noindex nofollow noimageindex noarchive" />
+</head>
+<body>
+  <header>
+    <h1>GEOS 472 Page</h1>
+  </header>
+  <div class="tabbar">
+    <button class="tab activeTab" id="homeTab" onclick="showTabContent('home');">p5.js Test Sketch</button><button class="tab" id="mapsTab" onclick="showTabContent('maps');">Maps</button>
+  </div>
+  <hr />
+  <div id="home">
+    <p>This page is for GEOS 472.</p>
+    <h3>p5.js Test Sketch</h3>
+    <button onclick="growDiff();">Add space between ellipses</button><button onclick="growRad();">Make ellipses bigger</button><br />
+    <button onclick="shrinkDiff();">Bring ellipses closer together</button><button onclick="shrinkRad();">Make ellipses smaller</button>
+    <div id="p5sketchCanvas"></div>
+  </div>
+  <div id="maps" display="none">
+    <h2>Cartographic Portfolio</h2>
+    <p>Below are a number of maps I have made. Click them to see full size.</p>
+    <h3>Southwest Indian Reservations</h3>
+    <a href="Southwest_4_3.png"><img src="Southwest_4_3.png" alt="Indian Reservations in the Southwestern United States" width="994" height="585" /></a>
+    <h3>United States Colonial Possessions in 1941</h3>
+    <a href="US_colonies_with_scalebars.png"><img src="US_colonies_with_scalebars.png" alt="United States Colonial Possessions in 1941: 48 states, Baker Island, Jarvis Island, Navassa Island, Howland Island, Johnston Atoll, Kingman Reef, Palmyra Atoll, Swan Islands, Midway Atoll or Midway Island, Alaska, Serrana Bank, Bajo Nuevo Bank, Quita Sueño Bank, Roncador Bank, Serranilla Bank, Hawaii, Wake Island, Puerto Rico, Guam, Commonwealth of the Philippines, American Samoa, U.S. Virgin Islands, and the Canton and Enderbury Islands condominium." width="363" height="262" /></a>
+    <h3>Foraging in United States National Parks</h3>
+    <a href="National Parks-AlaskaFixed.png"><img src="National Parks-AlaskaFixed.png" alt="Map of the National Parks of the United States colored according to whether foraging is allowed, not allowed, or allowed for traditional subsistence or Native American religious use only." width="351" height="248"/></a>
+    <h3>Where Foreigners Can Own Land in Mexico</h3>
+    <a href="Mexico.png"> <img src="Mexico.png" alt="Map of Mexico colored according to whether foreigners may own land or not. Within 100 kilometers of international borders and 50 kilometers of the coast, it is red, showing that foreigners are not allowed to own land in those areas. The interior of the country is green, showing that foreigners may own land there." width="351" height="248"/></a>
+    <h3>San Francisco Bay Area</h3>
+    <a href="11x17_Bay-4-fixed-key.png"><img src="11x17_Bay-4-fixed-key.png" alt="Map of the San Francisco Bay Area." width="330" height="510"/></a>
+    <h3>Indigenous Languages in Canada (<i>animated</i>)</h3>
+    <a href="Canada_Indigenous_native_speakers_1951-1971.gif"><img src="Canada_Indigenous_native_speakers_1951-1971.gif" alt="Animated map showing the percentage of Indigenous people in each province and territory of Canada whose mother tongue was an Indigenous language according to the Canadian census in 1951, 1961, and 1971." width="351" height="248" /></a>
+    <h3>Wildfire Frequency in the Northwest Territories, Canada</h3>
+    <a href="NWT_Wildfire_Frequency_noauthornames.png"><img src="NWT_Wildfire_Frequency_noauthornames.png" alt="Map of the Northwest Territories, Canada, colored to show the number of times each area has burned between 1965 and 2021, with white representing 0, yellow representing 1, orange representing 2, maroon representing 3, and purple representing 4." width="496" height="702" /></a>
+    <h3>Coeur d'Alene Indian Reservation</h3>
+    <a href="CdA_map-3-with-legend.png"><img src="CdA_map-3-with-legend.png" alt="Map showing the location of the Coeur d'Alene Indian Reservation in northern Idaho, United States." width="510" height="660" /></a>
+  </div>
+  <footer><p>2023</p></footer>
+</body>
+</html>

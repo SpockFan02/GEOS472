@@ -1,0 +1,1 @@
+The license.txt file in lib/ was copied from https://github.com/processing/p5.js/blob/main/license.txt and applies to the p5.js library only. All other content in this repository is (c) 2021-2023 and may not be copied or redistributed without permission of the author.
