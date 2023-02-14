@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GEOS 472: Symbol Scenarios</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+    <style>
+  /*
+  .tab {
+    background-color: #3eb489;
+    border-color: white;
+    border-style: solid solid none solid;
+    padding: 15px 15px;
+    display: inline-block;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  .tab:hover {
+    background-color: green;
+    color: white;
+  }
+  #maps {
+    display: none;
+  }
+  */
+  body {
+    background-color: #b57edc;
+  }
+  hr {
+    margin: 0px;
+  }
+  /*
+  .activeTab {
+    background-color: #b57edc;
+  }
+  */
+  #p5canvas {
+    margin-top: 5px;
+    display: block;
+    height: 180px;
+    background-color: blue;
+    width: 360px;
+  }
+  #xInput, #yInput, #valueInput, .button {
+    display: inline-block;
+  }
+  </style>
+  <script src="lib/p5.js" type="text/javascript" defer></script>
+  <script src="symbol-scenarios.js" type="text/javascript" defer></script>
+  <meta name="robots" content="noindex nofollow noimageindex noarchive" />
+</head>
+<body>
+  <header>
+    <h1>GEOS 472: Symbol Scenarios</h1>
+  </header>
+  <p>This page is an assignment for GEOS 472.</p>
+  <input type="text" placeholder="latitude" id="xInput" />
+  <input type="text" placeholder="longitude" id="yInput" />
+  <input type="text" placeholder="value" id="valueInput" />
+  <button onclick="updateValues()">Update values</button>
+  <div id="p5canvas"></div>
+  <a href="index.html">Return to home page</a>
+</html>
