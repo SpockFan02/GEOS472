@@ -45,9 +45,14 @@ function draw() {
 	symbolDiameter = 15;
 	drawSymbol();
   }
-  else { /*dataValue is negative or NaN*/
+  else if (dataValue < 0) {
+    stroke(255, 0, 0, 255); /*red*/
+	line(long + 175, -1 * lat + 95, long + 185, -1 * lat + 85);
+	line(long + 175, -1 * lat + 85, long + 185, -1 * lat + 95);
+  }
+  else { /*dataValue is NaN*/
     fill(255, 0, 0, 255); /*red*/
 	stroke(255, 0, 0, 255);
-	text("Data value must be non-negative!", 5, 15);
+	text("Invalid data value!", 5, 15);
   }
 }
