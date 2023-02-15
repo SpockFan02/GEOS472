@@ -57,15 +57,19 @@ function draw() {
       if ((-90 <= lat) && (lat <= 90) && (-180 <= long) && (long <= 180)) { /*valid coordinates*/
         if (((lat <= -80) && (long <= -170)) /*lower left corner of map*/ || ((lat <= -80) && (long > -170) && (long < 170) /*bottom edge of map, not a corner*/)) {
           ellipse(long + 190, -1 * lat + 80, symbolDiameter, symbolDiameter); /*draw symbol 10px up and to the right*/
+          line(long + 180, -1 * lat + 90, long + 190, -1 * lat + 80); /*draw line from coordinates to the offset symbol*/
         }
         else if ((lat <= -80) && (long >= 170)) { /*lower right corner of map*/
           ellipse(long + 170, -1 * lat + 80, symbolDiameter, symbolDiameter); /*draw symbol 10px up and to the left*/
+          line(long + 180, -1 * lat + 90, long + 170, -1 * lat + 80); /*draw line from coordinates to the offset symbol*/
         }
         else if (((lat >= 80) && (long <= -170)) /*upper left corner of map*/ || (((long <= -170) && (lat < 80) && (lat > -80)) /*left edge of map, not a corner*/)) {
           ellipse(long + 190, -1 * lat + 100, symbolDiameter, symbolDiameter); /*draw symbol 10px down and to the right*/
+          line(long + 180, -1 * lat + 90, long + 190, -1 * lat + 100); /*draw line from coordinates to the offset symbol*/
         }
         else { /*upper right corner, right edge, top edge, or anywhere else on the canvas*/
           ellipse(long + 170, -1 * lat + 100, symbolDiameter, symbolDiameter); /*draw symbol 10px down and to the left*/
+          line(long + 180, -1 * lat + 90, long + 170, -1 * lat + 100); /*draw line from coordinates to the offset symbol*/
         }
       }
       else { /*invalid coordinates*/
@@ -75,23 +79,34 @@ function draw() {
       }
     }
     else if (dataValue < 0) {
-      stroke(255, 0, 0, 255); /*red*/
       if ((-90 <= lat) && (lat <= 90) && (-180 <= long) && (long <= 180)) { /*valid coordinates*/
         if (((lat <= -80) && (long <= -170)) /*lower left corner of map*/ || ((lat <= -80) && (long > -170) && (long < 170) /*bottom edge of map, not a corner*/)) {
+          stroke(255, 0, 0, 255); /*red*/
           line(long + 185, -1 * lat + 85, long + 195, -1 * lat + 75); /*draw X 10px up and to the right*/
-          line(long + 185, -1 * lat + 75, long + 195, -1 * lat + 85); 
+          line(long + 185, -1 * lat + 75, long + 195, -1 * lat + 85);
+          stroke(0); /*black*/
+          line(long + 180, -1 * lat + 90, long + 190, -1 * lat + 80); /*draw line from coordinates to the offset X*/
         }
         else if ((lat <= -80) && (long >= 170)) { /*lower right corner of map*/
+          stroke(255, 0, 0, 255); /*red*/
           line(long + 165, -1 * lat + 85, long + 175, -1 * lat + 75); /*draw X 10px up and to the left*/
           line(long + 165, -1 * lat + 75, long + 175, -1 * lat + 85);
+          stroke(0); /*black*/
+          line(long + 180, -1 * lat + 90, long + 170, -1 * lat + 80); /*draw line from coordinates to the offset X*/
         }
         else if (((lat >= 80) && (long <= -170)) /*upper left corner of map*/ || (((long <= -170) && (lat < 80) && (lat > -80)) /*left edge of map, not a corner*/)) {
+          stroke(255, 0, 0, 255); /*red*/
           line(long + 185, -1 * lat + 105, long + 195, -1 * lat + 95); /*draw X 10px down and to the right*/
           line(long + 185, -1 * lat + 95, long + 195, -1 * lat + 105);
+          stroke(0); /*black*/
+          line(long + 180, -1 * lat + 90, long + 190, -1 * lat + 100); /*draw line from coordinates to the offset X*/
         }
         else { /*upper right corner, right edge, top edge, or anywhere else on the canvas*/
+          stroke(255, 0, 0, 255); /*red*/
           line(long + 165, -1 * lat + 105, long + 175, -1 * lat + 95); /*draw X 10px down and to the left*/
           line(long + 165, -1 * lat + 95, long + 175, -1 * lat + 105);
+          stroke(0); /*black*/
+          line(long + 180, -1 * lat + 90, long + 170, -1 * lat + 100); /*draw line from coordinates to the offset X*/
         }
       }
       else { /*invalid coordinates*/
