@@ -1,5 +1,7 @@
-<!-- Based on Mappa.js Simple Map tutorial: https://mappa.js.org/docs/simple-map.html -->
 <!DOCTYPE html>
+<!-- Based on Mappa.js tutorials:
+Simple Map - https://mappa.js.org/docs/simple-map.html
+Using Data - https://mappa.js.org/docs/using-data.html -->
 <html>
 <head>
   <title>GEOS472: Leaflet and Mappa.js</title>
@@ -21,23 +23,34 @@
       zoom: 4,
       style: "http://{s}.tile.osm.org/{z}/{x}/{y}.png"
     }
+    var meteorites;
 
     function setup() {
       canvas = createCanvas(640, 640);
       canvas.parent('p5canvas');
       meteoriteMap = mappa.tileMap(mappaOptions);
       meteoriteMap.overlay(canvas);
+      meteorites = loadTable('Meteorite_Landings.csv', 'csv', 'header');
+      meteoriteMap.onChange(drawMeteorites);
       fill(200, 100, 100); /*light red*/
-      meteoriteMap.onChange(drawPoint);
+      stroke(100);
     }
 
     function draw() {
     }
 
-    function drawPoint() {
+    function drawMeteorites() {
       clear();
-      var nigeria = meteoriteMap.latLngToPixel(11.396396, 5.076543);
-      ellipse(nigeria.x, nigeria.y, 20, 20);
+      for (var i = 0; i < meteorites.getRowCount(); i++) {
+        var latitude = Number(meteorites.getString(i, 'reclat'));
+        var longitude = Number(meteorites.getString(i, 'reclong'));
+        if (meteoriteMap.map.getBounds().contains({lat: latitude, lng: longitude})) {
+          var pos = meteoriteMap.latLngToPixel(latitude, longitude);
+          var size = meteorites.getString(i, 'mass (g)');
+          size = map(size, 558, 60000000 /*mass of Hoba meteorite*/, 1, 25) + meteoriteMap.zoom();
+          ellipse(pos.x, pos.y, size, size);
+        }
+      }
     }
   </script>
   <meta name="robots" content="noindex nofollow noimageindex noarchive" />
