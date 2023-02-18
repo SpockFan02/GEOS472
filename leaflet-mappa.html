@@ -18,10 +18,10 @@ Using Data - https://mappa.js.org/docs/using-data.html -->
     var mappa = new Mappa('Leaflet');
     var meteoriteMap;
     var mappaOptions = {
-      lat: 0,
-      lng: 0,
-      zoom: 4,
-      style: "http://{s}.tile.osm.org/{z}/{x}/{y}.png"
+      lat: 49.26,
+      lng: -123.34,
+      zoom: 3,
+      style: "https://map1.vis.earthdata.nasa.gov/wmts-webmerc/VIIRS_CityLights_2012/default//GoogleMapsCompatible_Level8/{z}/{y}/{x}.jpg"
     }
     var meteorites;
 
@@ -32,7 +32,6 @@ Using Data - https://mappa.js.org/docs/using-data.html -->
       meteoriteMap.overlay(canvas);
       meteorites = loadTable('Meteorite_Landings.csv', 'csv', 'header');
       meteoriteMap.onChange(drawMeteorites);
-      fill(200, 100, 100); /*light red*/
       stroke(100);
     }
 
@@ -48,6 +47,37 @@ Using Data - https://mappa.js.org/docs/using-data.html -->
           var pos = meteoriteMap.latLngToPixel(latitude, longitude);
           var size = meteorites.getString(i, 'mass (g)');
           size = map(size, 558, 60000000 /*mass of Hoba meteorite*/, 1, 25) + meteoriteMap.zoom();
+          var chondriteMeteoriteClasses = ["C", "C2-ung", "C3-ung", "C4-ung",
+          "CBa", "CH/CBb", "CI1", "CH3", "CK3", "CK4", "CK4-an", "CM1", "CM1/2",
+          "CM2", "CO3.2", "CO3.3", "CO3.5", "CO3.7", "CV3", "EH3", "EH4", "EL6",
+          "H", "H3.2-an", "H3-4", "H3/4", "H3.5", "H3-5", "H3.6", "H3-6",
+          "H3.6-6", "H3.7", "H3-7", "H3.9", "H~4", "H4", "H4-5", "H4/5", "H4-6",
+          "H~5", "H5", "H5-6", "H5/6", "H5-melt breccia", "H~6", "H6",
+          "H-melt rock", "L", "L3.4", "L3-4", "L3.5", "L(LL)3.5-3.7", "L3.6",
+          "L3-6", "L3.7", "L3.7-5", "L3.7-6", "L3.7-3.9", "L3.8", "L3.9", "L4",
+          "L4-5", "L4-6", "L~5", "L5", "L5-6", "L5/6", "L~6", "L6", "L6/7",
+          "L7", "LL", "LL(L)3", "LL3.00", "LL3.2", "LL3.3", "LL3.4", "LL3.6",
+          "LL3-6", "LL3.8", "LL3.9", "L/LL4", "L/LL4-6", "LL4", "L(LL)5", "LL5",
+          "LL5-6", "L/LL6", "LL~6", "LL6", "LL7", "OC", "R3.6", "R5"];
+          /*above likely incomplete*/
+          function isChondrite(meteorite) {
+            for (var chondriteIndex = 0; chondriteIndex <
+            chondriteMeteoriteClasses.length; chondriteIndex++) {
+              if (meteorite.includes(chondriteMeteoriteClasses[chondriteIndex])) {
+                return true;
+              }
+            }
+            return false;
+          }
+          if (meteorites.getString(i, 'recclass').includes("Iron")) {
+            fill(200, 100, 100, 200); /*light red*/
+          }
+          else if (isChondrite(meteorites.getString(i, 'recclass'))) {
+            fill(100, 100, 200, 200); /*light blue*/
+          }
+          else { /*theoretically, all stony achondrite meteorites*/
+            fill(255, 255, 255, 200); /*white*/
+          }
           ellipse(pos.x, pos.y, size, size);
         }
       }
@@ -61,7 +91,8 @@ Using Data - https://mappa.js.org/docs/using-data.html -->
   </header>
   <p>This page is an assignment for GEOS 472.</p>
   <div id="p5canvas"></div>
-  <p>Basemap from <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> and (c) OpenStreetMap contributors.</p>
+  <p>Blue circles indicate chondrite meteorites, red circles indicate iron achondrite meteorites, and white circles indicate non-iron (stony) achondrite meteorites. Circle size is proportional to meteorite mass.</p>
+  <p>Earth At Night 2012 basemap from Global Imagery Browse Services (GIBS), operated by the NASA/GSFC/<a href="https://www.earthdata.nasa.gov/esdis">Earth Science Data and Information System</a>.</p>
   <footer>
     <a href="index.html">Return to home page</a>
     <p>2023</p>
