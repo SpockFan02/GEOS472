@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<!-- Based on https://editor.p5js.org/geoglrb/sketches/ouev0qeo_ -->
+<!-- Based on https://editor.p5js.org/geoglrb/sketches/ouev0qeo_
+and https://editor.p5js.org/geoglrb/sketches/OY18-HuOn -->
 <html>
 <head>
-  <title>GEOS472: Leaflet-ing UBC: Parking at UBC</title>
+  <title>GEOS472: Filtering Leaflets</title>
   <link rel="icon" type="image/png" href="favicon.png" />
   <meta charset="utf-8" />
   <style>
@@ -39,13 +40,41 @@
         "fillOpacity": 0.5
       }
 
-      $.getJSON("https://raw.githubusercontent.com/UBCGeodata/ubcv-parking/master/geojson/ubcv_parking_www_poly.geojson",
-                 function (data) {
-                   L.geoJSON(data, {
-                       "style": parkingStyle,
+      var otherParkingStyle = {
+        "color": "#111111",
+        "weight": 5,
+        "fillColor": "#CCCCCC",
+        "opacity": 0.65,
+        "fillOpacity": 0.5
+      }
+
+      var parkingGeoJSONdata;
+
+      function drawParking() {
+        map.eachLayer(function (layer) {
+          if (layer !== topoTiles) { map.removeLayer(layer); } /* every time drawParking() is triggered, clear the map of everything except the basemap */
+        });
+        $.getJSON("https://raw.githubusercontent.com/UBCGeodata/ubcv-parking/master/geojson/ubcv_parking_www_poly.geojson",
+                   function (data) {
+                     L.geoJSON(data, {
+                       style: function(feature) {
+                         if ((feature.properties.FAC_DESCRIPTION.toLowerCase().includes("parkade")) && (document.getElementById("parkadeCheck").checked)) {
+                           return parkingStyle;
+                         }
+                         else if ((feature.properties.FAC_DESCRIPTION.toLowerCase().includes("lot") || feature.properties.FAC_DESCRIPTION.includes("Bollert Hall") || feature.properties.FAC_DESCRIPTION.includes("Court") || feature.properties.FAC_DESCRIPTION.includes("Botanical Gardens") || feature.properties.FAC_DESCRIPTION.includes("University Hill Secondary School") || feature.properties.FAC_DESCRIPTION.includes("Vancouver School of Economics") || feature.properties.FAC_DESCRIPTION.includes("Triumf") || feature.properties.FAC_DESCRIPTION.includes("Comparative Medicine")) && (document.getElementById("lotCheck").checked)) {
+                           return parkingStyle;
+                         }
+                         else if ((feature.properties.FAC_DESCRIPTION.includes("Boulevard") || feature.properties.FAC_DESCRIPTION.includes("Fairview Crescent")
+                         || feature.properties.FAC_DESCRIPTION.includes("Road") || feature.properties.FAC_DESCRIPTION.includes("Wesbrook Mall Tbird to 16th")
+                         || feature.properties.FAC_DESCRIPTION.includes("Thunderbird Crescent") || feature.properties.FAC_DESCRIPTION.includes("Meters"))
+                         && (document.getElementById("streetCheck").checked)) {
+                           return parkingStyle;
+                         }
+                         else { console.log("false"); return otherParkingStyle; }
+                       },
                        onEachFeature: function(feature, layer) {
                          if ((feature.properties.FAC_DESCRIPTION + feature.properties.FAC_RATE + feature.properties.FAC_RATEPM) !== null) { /*no empty tooltips*/
-                           if ((feature.properties.FAC_TIPS) !== null) { /* don't add note if it's null */ 
+                           if ((feature.properties.FAC_TIPS) !== null) { /* don't add note if it's null */
                            layer.bindTooltip(feature.properties.FAC_DESCRIPTION + "<br />Daytime cost: " + feature.properties.FAC_RATE + "<br />Nighttime cost: " + feature.properties.FACE_RATEPM + "<br />" + feature.properties.FAC_TIPS); /*\n doesn't work, have to use <br /> for multiline tooltips*/
                            }
                            else {
@@ -53,20 +82,35 @@
                            }
                          }
                        }
-                     }
-                   ).addTo(map);
-                 }
-               );
+                     }).addTo(map);
+                   }
+                 )
+      }
+
+      document.getElementById("parkadeCheck").addEventListener("change", drawParking); /* when passing a function to an event listener, do not use parentheses after the function name, otherwise it is calling the function instead of passing it to the event listener and it will only run the function once when the page is loaded instead of when the event is triggered... */
+      document.getElementById("lotCheck").addEventListener("change", drawParking);
+      document.getElementById("streetCheck").addEventListener("change", drawParking);
+
+      drawParking(); /* call it once when <body> loads */
     }
   </script>
 </head>
 <body onload="drawLeafletMap();">
   <header>
-    <h1>GEOS 472: Leaflet-ing UBC</h1>
+    <h1>GEOS 472: Filtering Leaflets</h1>
     <h2>Parking at UBC</h2>
   </header>
-  <p>This page is an assignment for GEOS 472.</p>
+  <p>This page is an assignment for GEOS 472. Click the checkboxes below to toggle the highlighting of three different types of parking areas.</p>
   <div id="leafletmapdiv" style="width: 600px; height: 800px;"></div>
+  <label for="parkadeCheck">
+    <input type="checkbox" id="parkadeCheck" value="yes">Parkades</input>
+  </label>
+  <label for="lotCheck">
+    <input type="checkbox" id="lotCheck" value="yes">Parking lots</input>
+  </label>
+  <label for="streetCheck">
+    <input type="checkbox" id="streetCheck" value="yes">Street parking</input>
+  </label>
   <p>Data from <a href="https://github.com/UBCGeodata/ubcv-parking">UBCGeodata</a>
   <footer>
     <a href="index.html">Return to home page</a>
