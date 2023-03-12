@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GEOS 472 Exploratory Lab 1</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <meta charset='utf-8' />
+  <style>
+  body {
+    background-color: #b57edc;
+    margin: 0;
+    padding: 0;
+  }
+  #map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+  </style>
+  <meta name='viewport' content='width=device-width, initial-scale=1' />
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css' rel='stylesheet' />
+  <script type="text/javascript">
+function drawMapboxMap() {
+
+mapboxgl.accessToken = 'pk.eyJ1IjoiYWIwMjEiLCJhIjoiY2xleG5vZHgwMXBnZzN2cW81cnYwZHVlcSJ9.9BBhIwQFb7-xBcrVllV8rg';
+const map = new mapboxgl.Map({
+    container: 'map', // container ID
+    style: 'mapbox://styles/ab021/clf1h666s000101tc1c5wkx6k', // style URL
+    center: [-119, 37], // starting position [lng, lat]
+    zoom: 5 // starting zoom
+});
+
+map.on('load', () => {
+    map.addSource('ca_counties', {
+      type: 'geojson',
+      data: 'CA_Counties_TI_FeaturesToJSO.geojson'
+    });
+    map.addLayer({
+        id: 'ca_counties_layer',
+        type: 'fill',
+        source: 'ca_counties',
+        /*'source-layer': 'contour'*/
+        paint: {
+          'fill-color': 'rgba(25,25,25,255)',
+          'fill-outline-color': 'rgba(255,25,25,255)'
+        }
+    });
+});
+
+}
+  </script>
+</head>
+<body onload="drawMapboxMap();">
+  <div id="map" />
+</body>
+</html>
