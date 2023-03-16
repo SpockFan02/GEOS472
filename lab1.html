@@ -33,16 +33,26 @@ const map = new mapboxgl.Map({
 map.on('load', () => {
     map.addSource('ca_counties', {
       type: 'geojson',
-      data: 'CA_Counties_TI_FeaturesToJSO.geojson'
+      data: './CA_counties_reprojected.geojson'
     });
     map.addLayer({
         id: 'ca_counties_layer',
         type: 'fill',
         source: 'ca_counties',
-        /*'source-layer': 'contour'*/
+        // Based on this example:
+        // https://docs.mapbox.com/mapbox-gl-js/example/updating-choropleth/
         paint: {
-          'fill-color': 'rgba(25,25,25,255)',
-          'fill-outline-color': 'rgba(255,25,25,255)'
+          'fill-color': [
+            'interpolate',
+            ['linear'],
+            ['get', '2020turnout'],
+            0, '#000000',
+            0.25, '#6D9180',
+            0.5, '#36C880',
+            1.0, '#00FF80',
+          ],
+          'fill-opacity': 0.5,
+          'fill-outline-color': 'rgba(255,255,255,255)'
         }
     });
 });
@@ -51,6 +61,6 @@ map.on('load', () => {
   </script>
 </head>
 <body onload="drawMapboxMap();">
-  <div id="map" />
+  <div id="map"></div>
 </body>
 </html>
