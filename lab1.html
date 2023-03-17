@@ -23,6 +23,37 @@
     left: 10px;
     color: #FFFFFF;
   }
+  #legend {
+    z-index: 2;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: #FFFFFF;
+  }
+  #zeropc {
+    width: 20px;
+    height: 20px;
+    background-color: #000000;
+    opacity: 0.5;
+  }
+  #twentyfivepc {
+    width: 20px;
+    height: 20px;
+    background-color: #6D9180;
+    opacity: 0.5;
+  }
+  #fiftypc {
+    width: 20px;
+    height: 20px;
+    background-color: #36C880;
+    opacity: 0.5;
+  }
+  #onehundredpc {
+    width: 20px;
+    height: 20px;
+    background-color: #00FF80;
+    opacity: 0.5;
+  }
   </style>
   <meta name='viewport' content='width=device-width, initial-scale=1' />
   <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js'></script>
@@ -101,6 +132,13 @@ map.on('load', () => {
   <div id="slider-container">
     <input type="range" min="2016" max="2022" value="2022" step="2" id="slider">
     <div id="selected-year">2022</div>
+    <p>Voter turnout by county, California</p>
+  </div>
+  <div id="legend">
+    <div id="zeropc"></div>0%<br />
+    <div id="twentyfivepc"></div>25%<br />
+    <div id="fiftypc"></div>50%</br>
+    <div id="onehundredpc"></div>100%<br />
   </div>
 </body>
 </html>
