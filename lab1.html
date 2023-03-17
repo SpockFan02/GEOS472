@@ -15,6 +15,14 @@
     top: 0;
     bottom: 0;
     width: 100%;
+    z-index: 1;
+  }
+  #slider-container {
+    z-index: 2;
+    position: absolute;
+    left: 10px;
+    color: #FFFFFF;
+  }
   </style>
   <meta name='viewport' content='width=device-width, initial-scale=1' />
   <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js'></script>
@@ -29,6 +37,34 @@ const map = new mapboxgl.Map({
     center: [-119, 37], // starting position [lng, lat]
     zoom: 5 // starting zoom
 });
+
+var electionYear = 2022;
+
+document.getElementById("slider").oninput = () => {
+  electionYear = document.getElementById("slider").value;
+  document.getElementById("selected-year").innerHTML = electionYear.toLowerCase();
+  map.removeLayer('ca_counties_layer');
+  map.addLayer({
+        id: 'ca_counties_layer',
+        type: 'fill',
+        source: 'ca_counties',
+        // Based on this example:
+        // https://docs.mapbox.com/mapbox-gl-js/example/updating-choropleth/
+        paint: {
+          'fill-color': [
+            'interpolate',
+            ['linear'],
+            ['get', electionYear + 'turnout'],
+            0, '#000000',
+            0.25, '#6D9180',
+            0.5, '#36C880',
+            1.0, '#00FF80',
+          ],
+          'fill-opacity': 0.5,
+          'fill-outline-color': 'rgba(255,255,255,255)'
+        }
+    });
+}
 
 map.on('load', () => {
     map.addSource('ca_counties', {
@@ -45,7 +81,7 @@ map.on('load', () => {
           'fill-color': [
             'interpolate',
             ['linear'],
-            ['get', '2020turnout'],
+            ['get', electionYear + 'turnout'],
             0, '#000000',
             0.25, '#6D9180',
             0.5, '#36C880',
@@ -62,5 +98,9 @@ map.on('load', () => {
 </head>
 <body onload="drawMapboxMap();">
   <div id="map"></div>
+  <div id="slider-container">
+    <input type="range" min="2016" max="2022" value="2022" step="2" id="slider">
+    <div id="selected-year">2022</div>
+  </div>
 </body>
 </html>
