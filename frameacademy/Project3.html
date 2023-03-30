@@ -34,14 +34,15 @@
     <a-box position="0 1 -15" rotation="0 0 0" color="#4CC3D9" scale="1 1 1" animation="property: rotation; to: 99999 0 0; dur: 99999; loop: true;"></a-box>
     <!--Project #2 Part 3-->
     <a-entity camera wasd-controls look-controls position="0 3 15" animation="property: position; to: 0 3 0; dur: 5000;"></a-entity>
-    <!--Project #3 Part 1-->
-    <a-sphere color="#55FFFF" position="15 1 -15" radius="2" rotation="0 5 0">
+    <!--Project #3 Parts 1 and 2-->
+    <a-sphere color="#55FFFF" position="15 1 -15" radius="2" rotation="0 5 0" animation="property: radius; to: 5; dur: 5000; dir: alternate; loop: true;" animation__2="property: scale; to: 2 1 1; dur: 10000; loop: true; dir: alternate;">
+    <!--Animating radius of the parent sphere does not affect the children, but they do inherit the scale animation-->
       <a-box color="#99DDDD" position="0 3 0"></a-box>
       <a-sphere color="#99DDDD" position="2 3 2" radius="1"></a-sphere>
     </a-sphere>
   </a-scene>
   <footer>
-    <p>Based on <a href="https://learn.framevr.io/academy">Frame Academy</a> Projects <a href="https://learn.framevr.io/project1/part1">#1</a>, <a href="https://learn.framevr.io/project2/part1">#2</a>, and <a href="https://learn.framevr.io/academy/project3/part1"</a></p>
+    <p>Based on <a href="https://learn.framevr.io/academy">Frame Academy</a> Projects <a href="https://learn.framevr.io/project1/part1">#1</a>, <a href="https://learn.framevr.io/project2/part1">#2</a>, and <a href="https://learn.framevr.io/project3/part1">#3</a></p>
     <p><a href="https://sketchfab.com/3d-models/sheep-2-5e52b176b573484ca31f709ec1c441a5">Sheep model</a> created by Artbake Graphics, <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY 4.0 license</a><br />
     <a href="https://commons.wikimedia.org/wiki/File:Triveni_Sangam_Tourism_Complex_-_360x180_Degree_Equirectangular_View_-_Geonkhali_-_East_Midnapore_2015-09-18_4119-4129.tif">Photosphere image</a> by Gangulybiswarup, <a href="https://creativecommons.org/licenses/by/3.0/deed.en">CC-BY 3.0 license</a><br />
     <a href="https://commons.wikimedia.org/wiki/File:Dry_wood_texture.jpg">Wood texture</a> by Martin Vorel, <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">CC-BY-SA 4.0 license</a><br />
