@@ -16,18 +16,26 @@
     <h1>Frame Academy: Project 3</h1>
   </header>
   <a-scene background="color: #5555FF">
-    <a-sky src="Triveni_Sangam_Tourism_Complex_-_360x180_Degree_Equirectangular_View_-_Geonkhali_-_East_Midnapore_2015-09-18_4119-4129.tif.jpg"></a-sky>
-    <a-gltf-model id="sheep" position="0 0 -3" rotation="0 100 0" src="sheep unified.glb"></a-gltf-model>
+    <!--Project #3 Part 3-->
+    <a-assets>
+      <img id="photosphere" src="Triveni_Sangam_Tourism_Complex_-_360x180_Degree_Equirectangular_View_-_Geonkhali_-_East_Midnapore_2015-09-18_4119-4129.tif.jpg" />
+      <a-asset-item id="sheepmodel" src="sheep unified.glb" response-type="arraybuffer"></a-asset-item>
+      <img id="drywoodtexture" src="Dry_wood_texture.jpeg" />
+      <a-asset-item id="UFOmodel" src="Rigged_Modular UFO 2.8.glb" response-type="arraybuffer"></a-asset-item>
+    </a-assets>
+
+    <a-sky src="#photosphere"></a-sky>
+    <a-gltf-model id="sheep" position="0 0 -3" rotation="0 100 0" src="#sheepmodel"></a-gltf-model>
     <a-text value="Example Text, Frame Academy Project #1" position="0 1 -2"></a-text>
-    <a-plane src="Dry_wood_texture.jpeg" position="1.75 1 -2" scale="5 0.5"></a-plane>
+    <a-plane src="#drywoodtexture" position="1.75 1 -2" scale="5 0.5"></a-plane>
     <!--Project #1 Part 1 Challenge #1 and Part 2 Challenge #2-->
     <a-box color="blue" position="-2 2.003 -4" scale="0.566 4.000 4.500"></a-box>
     <a-box color="green" position="0 0 -10" scale="1 2 1" rotation="0 0 -22.39"></a-box>
     <a-box color="red" position="3 0 -4"></a-box>
     <a-box color="blue" position="0 2 4" scale="4.5 4 0.5"></a-box>
-    <a-box position="0 -1 0" scale="4.5 0.5 4.5" src="Dry_wood_texture.jpeg"></a-box>
+    <a-box position="0 -1 0" scale="4.5 0.5 4.5" src="#drywoodtexture"></a-box>
     <!--Project #2 Part 1-->
-    <a-gltf-model src="Rigged_Modular UFO 2.8.glb" position="5 2 -10" rotation="200 0 0" scale="1 1 1" animation-mixer></a-gltf-model>
+    <a-gltf-model src="#UFOmodel" position="5 2 -10" rotation="200 0 0" scale="1 1 1" animation-mixer></a-gltf-model>
     <!--Project #2 Part 2-->
     <a-box position="-2 1.5 -4.5" rotation="0 45 0" color="#4CC3D9" depth=".2" width="2" animation="property: position; to: -1 1.5 -4.5; loop: true;" animation__2="property: color; to: #ff0000; loop:true;"></a-box>
     <a-box position="-5 1 -4.5" rotation="0 45 0" color="#4CC3D9" depth=".2" width="2"></a-box>
