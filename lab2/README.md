@@ -2,7 +2,7 @@
 
 ##My Title: Immigration to Canada
 
-[My interactive map](index.html)
+[My interactive map](https://spockfan02.github.io/GEOS472/lab2/)
 
 I used Leaflet, and relied on my previous assignments which used Leaflet, the [Leaflet documentation](https://leafletjs.com/reference.html), and StackOverflow to code the features that I implemented. The animation was accomplished using the [slideTo library](https://gitlab.com/IvanSanchez/Leaflet.Marker.SlideTo) by Iván Sánchez Ortega.
 
