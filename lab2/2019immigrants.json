@@ -1,0 +1,71 @@
+[
+ {
+   "origin": "India",
+   "number": 85593,
+   "lat": 22,
+   "long": 78,
+   "color": "orange"
+ },
+ {
+   "origin": "PRC",
+   "number": 30246,
+   "lat": 35,
+   "long": 115,
+   "color": "red"
+ },
+ {
+   "origin": "Philippines",
+   "number": 27818,
+   "lat": 15,
+   "long": 121,
+   "color": "blue"
+ },
+ {
+   "origin": "Nigeria",
+   "number": 12602,
+   "lat": 8,
+   "long": 5,
+   "color": "#008753"
+ },
+ {
+   "origin": "Pakistan",
+   "number": 10793,
+   "lat": 30,
+   "long": 70,
+   "color": "#00401A"
+ },
+ {
+   "origin": "USA",
+   "number": 10780,
+   "lat": 37,
+   "long": -92,
+   "color": "blue"
+ },
+ {
+   "origin": "Syria",
+   "number": 10121,
+   "lat": 35,
+   "long": 37,
+   "color": "#ce1126"
+ },
+ {
+   "origin": "Eritrea",
+   "number": 7030,
+   "lat": 15,
+   "long": 40,
+   "color": "#3C8BDC"
+ }, {
+   "origin": "ROK",
+   "number": 6103,
+   "lat": 36,
+   "long": 128,
+   "color": "#240E70"
+ },
+ {
+   "origin": "Iran",
+   "number": 3812,
+   "lat": 33,
+   "long": 52,
+   "color": "#239f40"
+ }
+]
